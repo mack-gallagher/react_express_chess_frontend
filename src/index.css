@@ -1,0 +1,72 @@
+body {
+  margin: 0;
+  font-family: 'Helvetica';
+}
+
+.App {
+  text-align: center;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(10,100,140);
+}
+
+h1 {
+  margin: 4% auto;
+}
+
+h1, h2, h4 {
+  color: white;
+  font-weight: lighter;
+}
+
+.Board {
+  display: flex;
+  width: 50vw;
+  height: 50vw;
+  flex-direction: column;
+}
+
+.row {
+  height: 12.5%;
+  display: flex;
+}
+
+.square {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 12.5%;
+  justify-content: center;
+  align-items: center;
+}
+
+.dark {
+  background-color: rgb(100,120,120);
+}
+
+.light {
+  background-color: rgb(200,200,220);
+}
+
+.active {
+  color: rgb(200,100,100);
+}
+
+.header {
+  
+  text-decoration: underline;
+  color: rgb(120,180,220);
+}
+
+button {
+  margin: 2% 0 0;
+}
+
+form, form > * {
+  display: flex;
+  flex-direction: column;
+}
