@@ -12,7 +12,7 @@ import WaitingPage from './components/WaitingPage';
 
 import { BrowserRouter } from 'react-router-dom';
 
-const url = 'https://spx-online-game-server.herokuapp.com'
+const url = process.env.URL || 'https://spx-online-game-server.herokuapp.com'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
