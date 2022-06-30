@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 import Row from './Row';
 
 function Board(props) {
@@ -13,11 +12,6 @@ function Board(props) {
       yxs[i].push(j);
     }
   }
-
-  useEffect(() => {
-    console.log(`board_state from within board:`);
-    console.log(board_state);
-  },[]);
 
   return (
     <div className="Board">

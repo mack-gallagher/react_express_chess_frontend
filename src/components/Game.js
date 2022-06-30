@@ -54,7 +54,7 @@ function Game(props) {
     axios.get(`${url}/api/game`,axios_settings)
       .then(response => {
         if (response.data.won !== -1) {
-          navigate('../won/:${response.data.won}');
+          navigate(`../won/:${response.data.won}`);
         }
         set_color(response.data.color); 
         set_board_state(response.data.board);
@@ -88,8 +88,6 @@ function Game(props) {
 
     set_board_state(response.data.board);
   }
-
-  const PORT = 9000;
 
   return (
       <div className="Game">

@@ -3,8 +3,6 @@ import axios from 'axios';
 import useInterval from '../utils';
 import { useNavigate } from 'react-router-dom';
 
-const PORT = 9000;
-
 function WaitingPage(props) {
 
   const { url } = props;
