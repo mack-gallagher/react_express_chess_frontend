@@ -12,14 +12,16 @@ import WaitingPage from './components/WaitingPage';
 
 import { BrowserRouter } from 'react-router-dom';
 
+const url = process.env.URL || 'https://spx-online-game-server.herokuapp.com'
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Routes>
       <Route path='/' element={ <App /> }>
-        <Route exact path='/' element={ <PlayForm /> } />
-        <Route path='game' element={ <Game /> } />
-        <Route path='waiting' element={ <WaitingPage /> } />
+        <Route exact path='/' element={ <PlayForm url={url} /> } />
+        <Route path='game' element={ <Game url={url} /> } />
+        <Route path='waiting' element={ <WaitingPage url={url} /> } />
       </Route>
     </Routes>
   </BrowserRouter>

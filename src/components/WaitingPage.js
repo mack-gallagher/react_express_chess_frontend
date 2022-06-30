@@ -5,7 +5,9 @@ import { useNavigate } from 'react-router-dom';
 
 const PORT = 9000;
 
-function WaitingPage() {
+function WaitingPage(props) {
+
+  const { url } = props;
 
   const navigate = useNavigate();
 
@@ -17,7 +19,7 @@ function WaitingPage() {
 
 
   useInterval(() => {
-    axios.get(`http://localhost:${PORT}/api/game`,axios_settings)
+    axios.get(`${url}/api/game`,axios_settings)
       .then(response => {
         if (response.data.num_players === 2) {
           navigate('../game');

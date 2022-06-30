@@ -4,7 +4,9 @@ import axios from 'axios';
 import useInterval from '../utils';
 import { useNavigate } from 'react-router-dom';
 
-function Game() {
+function Game(props) {
+
+  const { url } = props;
 
   const navigate = useNavigate();
 
@@ -32,7 +34,7 @@ function Game() {
   const black_pieces = ['♚','♛','♝','♜','♞','♟'];
 
   useEffect(() => {
-    axios.get(`http://localhost:${PORT}/api/game/`,axios_settings)
+    axios.get(`${url}/api/game/`,axios_settings)
       .then(response => {
         console.log('initial board state from useEffect:');
         console.log(response.data.board);
@@ -49,7 +51,7 @@ function Game() {
 
 
   useInterval(() => {
-    axios.get(`http://localhost:${PORT}/api/game`,axios_settings)
+    axios.get(`${url}/api/game`,axios_settings)
       .then(response => {
         if (response.data.won !== -1) {
           navigate('../won/:${response.data.won}');
@@ -63,7 +65,7 @@ function Game() {
   }, 1000);
 
   const activate_piece = async (pos) => {
-    const response = await axios.post(`http://localhost:${PORT}/api/game/activate`,{ pos },axios_settings);
+    const response = await axios.post(`${url}/api/game/activate`,{ pos },axios_settings);
     if (response.status === 200) {
       set_active_div(pos);
     }
@@ -71,16 +73,16 @@ function Game() {
 
 
   const move_piece = async (pos) => {
-    const response = await axios.post(`http://localhost:${PORT}/api/game/move`,{ start: active_div, destination: pos },axios_settings);
+    const response = await axios.post(`${url}/api/game/move`,{ start: active_div, destination: pos },axios_settings);
     console.log(response);
     set_active_div(null);
-    const board_response = await axios.get(`http://localhost:${PORT}/api/game/`,axios_settings);
+    const board_response = await axios.get(`${url}/api/game/`,axios_settings);
     set_board_state(board_response.data.board);
 
   }
 
   const reset_board = async () => {
-    const response = await axios.post(`http://localhost:${PORT}/api/game/reset`,{},axios_settings);
+    const response = await axios.post(`${url}/api/game/reset`,{},axios_settings);
 
     console.log(response.data);
 
