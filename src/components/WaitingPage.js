@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 function WaitingPage(props) {
 
-  const { url } = props;
+  const { url, abandon_ship } = props;
 
   const navigate = useNavigate();
 
@@ -15,19 +15,28 @@ function WaitingPage(props) {
     }
   };
 
-
   useInterval(() => {
     axios.get(`${url}/api/game`,axios_settings)
       .then(response => {
         if (response.data.num_players === 2) {
           navigate('../game');
         }
-      });
+      })
+      .catch(err => {
+        abandon_ship();
+      })
   },1000);  
   
-  return (<div className="waiting-page">
+  return (
+          <div className="waiting-page">
             <h1>Waiting for a Player 2 to join...</h1>
-          </div>);
+            <button
+              onClick={() => abandon_ship().then(response => navigate('..'))}
+            >
+              Reset and Return To Main Page
+            </button>
+          </div>
+          );
 }
 
 export default WaitingPage;

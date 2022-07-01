@@ -5,7 +5,7 @@ import axios from 'axios';
 
 function PlayForm(props) {
 
-  const { url } = props;
+  const { url, abandon_ship } = props;
 
   const navigate = useNavigate();
 
@@ -65,6 +65,11 @@ function PlayForm(props) {
         disabled={form_values.player_name.length?false:true}
       >
         PLAY
+      </button>
+      <button
+        onClick={abandon_ship}
+      >
+        Reset and Return To Main Page
       </button>
     </form>
          );

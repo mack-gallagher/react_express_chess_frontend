@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Game(props) {
 
-  const { url } = props;
+  const { url, abandon_ship } = props;
 
   const navigate = useNavigate();
 
@@ -53,15 +53,21 @@ function Game(props) {
   useInterval(() => {
     axios.get(`${url}/api/game`,axios_settings)
       .then(response => {
-        if (response.data.won !== -1) {
-          navigate(`../won/:${response.data.won}`);
+        if (response.data.won !== -1) { 
+          navigate('../endgame');
         }
         set_color(response.data.color); 
         set_board_state(response.data.board);
         set_is_active(response.data.active?1:0);
         set_captures(response.data.captures.map(x => x.piece));
-        console.log(captures);
-      });
+      })
+      .catch(err => {
+        console.log('resetting db!');
+        abandon_ship()
+          .then(response2 => {
+            navigate('..');
+          })
+      })
   }, 1000);
 
   const activate_piece = async (pos) => {
@@ -81,11 +87,8 @@ function Game(props) {
 
   }
 
-  const reset_board = async () => {
+  const reset_board = async _ => {
     const response = await axios.post(`${url}/api/game/reset`,{},axios_settings);
-
-    console.log(response.data);
-
     set_board_state(response.data.board);
   }
 
@@ -102,15 +105,20 @@ function Game(props) {
           white_pieces={white_pieces}
           black_pieces={black_pieces}
         />
+        <p className="header">Captures</p>
+        <div className="captures-display">
+          { captures }
+        </div>
         <button
           onClick={reset_board}
         >
           Reset Board
         </button>
-        <p className="header">Captures</p>
-        <div className="captures-display">
-          { captures }
-        </div>
+        <button
+          onClick={abandon_ship}
+        >
+          Reset and Return To Main Page
+        </button>
       </div>
           );
 
