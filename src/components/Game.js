@@ -60,7 +60,10 @@ function Game(props) {
         set_board_state(response.data.board);
         set_is_active(response.data.active?1:0);
         set_captures(response.data.captures.map(x => x.piece));
-        set_won(response.data.won);
+      })
+      .catch(err => {
+        console.error(err);
+        abandon_ship();
       })
   }, 1000);
 
