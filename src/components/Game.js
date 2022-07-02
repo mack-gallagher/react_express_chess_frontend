@@ -53,20 +53,10 @@ function Game(props) {
   useInterval(() => {
     axios.get(`${url}/api/game`,axios_settings)
       .then(response => {
-        if (response.data.won !== -1) { 
-          navigate('../endgame');
-        }
         set_color(response.data.color); 
         set_board_state(response.data.board);
         set_is_active(response.data.active?1:0);
         set_captures(response.data.captures.map(x => x.piece));
-      })
-      .catch(err => {
-        console.log('resetting db!');
-        abandon_ship()
-          .then(response2 => {
-            navigate('..');
-          })
       })
   }, 1000);
 
