@@ -14,7 +14,7 @@ import WinPage from './components/WinPage';
 
 import { BrowserRouter } from 'react-router-dom';
 
-const url = 'http://spx-online-game-server.herokuapp.com';
+const url = 'https://spx-online-game-server.herokuapp.com';
 
 let axios_settings = {
   headers: {
