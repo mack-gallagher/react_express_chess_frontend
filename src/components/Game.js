@@ -54,7 +54,7 @@ function Game(props) {
     axios.get(`${url}/api/game`,axios_settings)
       .then(response => {
         if (response.data.won !== -1) {
-          navigate('endgame');
+          navigate('../endgame');
         }
         set_color(response.data.color); 
         set_board_state(response.data.board);
