@@ -2,7 +2,7 @@ import React from 'react';
 
 function Square(props) {
 
-  const { activate_piece, active_div, move_piece, y, x, piece, color, white_pieces, black_pieces } = props;
+  const { activate_piece, active_div, move_piece, y, x, piece, color, white_pieces, black_pieces, set_queen_dest } = props;
 
   const my_pieces = [...(color===1?white_pieces:black_pieces)];
 

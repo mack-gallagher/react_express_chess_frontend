@@ -2,13 +2,20 @@ import React, { useState, useEffect } from 'react';
 import Board from './Board';
 import axios from 'axios';
 import useInterval from '../utils';
+import QueenModal from './QueenModal';
+import CastleButton from './CastleButton';
 import { useNavigate } from 'react-router-dom';
 
 function Game(props) {
 
-  const { url, abandon_ship } = props;
+  const { url, dump } = props;
 
   const navigate = useNavigate();
+
+  const abandon_ship = async _ => {
+    await dump();
+    navigate('..');
+  }
 
   let axios_settings = {
     headers: {
@@ -25,10 +32,16 @@ function Game(props) {
   }
 
   const [active_div,set_active_div] = useState(null);
-  const [board_state,set_board_state] = useState(initial_board_state);
+  const [board,set_board] = useState(initial_board_state);
   const [color,set_color] = useState(1);
   const [is_active,set_is_active] = useState(0);
   const [captures,set_captures] = useState([]);
+  const [queening,set_queening] = useState(0);
+  const [queen_dest,set_queen_dest] = useState([]);
+  const [can_castle_kingside,set_can_castle_kingside] = useState(0);
+  const [can_castle_queenside,set_can_castle_queenside] = useState(0);
+  const [castle_possible_kingside,set_castle_possible_kingside] = useState(1);
+  const [castle_possible_queenside,set_castle_possible_queenside] = useState(1);
 
   const white_pieces = ['♔','♕','♗','♖','♘','♙'];
   const black_pieces = ['♚','♛','♝','♜','♞','♟'];
@@ -36,17 +49,9 @@ function Game(props) {
   useEffect(() => {
     axios.get(`${url}/api/game/`,axios_settings)
       .then(response => {
-        console.log('initial board state from useEffect:');
-        console.log(response.data.board);
-        set_board_state(response.data.board);
-        console.log('initial board state:');
-        console.log(board_state);
-
+        set_board(response.data.board); 
         set_color(response.data.color);
       })
-      .then(_ => {
-        console.log(`my color: ${color}`);
-      });
   },[]);
 
 
@@ -57,9 +62,29 @@ function Game(props) {
           navigate('../endgame');
         }
         set_color(response.data.color); 
-        set_board_state(response.data.board);
+        set_board(response.data.board);
         set_is_active(response.data.active?1:0);
         set_captures(response.data.captures.map(x => x.piece));
+        set_queening(response.data.queening);
+        set_castle_possible_kingside(response.data.castle_possible_kingside);
+        set_castle_possible_queenside(response.data.castle_possible_queenside);
+        const necessary_kingside_clearances = color===1?
+                                                [[7,5],[7,6]]:
+                                                [[0,5],[0,6]];
+        const necessary_queenside_clearances = color==1?
+                                                [[7,1],[7,2],[7,3]]:
+                                                [[0,1],[0,2],[0,3]];
+        const kingside_clear = necessary_kingside_clearances.reduce((acc,x) => {
+          return acc + ((response.data.board[x[0]][x[1]].piece==='')?0:1);
+        },0);
+        const queenside_clear = necessary_queenside_clearances.reduce((acc,x) => {
+          return acc + ((response.data.board[x[0]][x[1]].piece==='')?0:1);
+        },0);
+        set_can_castle_kingside((response.data.castle_possible_kingside&&kingside_clear===0)?1:0);
+        set_can_castle_queenside((response.data.castle_possible_queenside&&queenside_clear===0)?1:0);
+
+        
+
       })
       .catch(err => {
         console.error(err);
@@ -76,31 +101,79 @@ function Game(props) {
 
 
   const move_piece = async (pos) => {
-    const response = await axios.post(`${url}/api/game/move`,{ start: active_div, destination: pos },axios_settings);
-    console.log(response);
-    set_active_div(null);
-    const board_response = await axios.get(`${url}/api/game/`,axios_settings);
-    set_board_state(board_response.data.board);
 
+    const piece = board[pos[0]][pos[1]].piece;
+
+    try {
+      const response = await axios.post(`${url}/api/game/move`,{ start: active_div, destination: pos },axios_settings);
+
+      if (response.data.queening) {
+        await set_queening(1);
+        set_queen_dest(pos);
+      } else {
+        set_queening(0);
+        set_queen_dest(pos);
+      }
+      set_active_div(null);
+      const board_response = await axios.get(`${url}/api/game/`,axios_settings);
+      set_board(board_response.data.board);
+
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  const castle = async (king_or_queen_side) => {
+    try {
+      await axios.post(`${url}/api/game/castle`,{ king_or_queen_side: king_or_queen_side },axios_settings);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   const reset_board = async _ => {
     const response = await axios.post(`${url}/api/game/reset`,{},axios_settings);
-    set_board_state(response.data.board);
+    set_board(response.data.board);
   }
 
   return (
       <div className="Game">
         <h1>{is_active?'Your turn!':((color-1)?'White':'Black')+"'s turn!"}</h1>
+        <QueenModal
+          on={queening}
+          axios_settings={axios_settings}
+          color={color}
+          url={url}
+          queen_dest={queen_dest}
+        />
         <Board
           activate_piece={activate_piece}
           move_piece={move_piece}
-          board_state={board_state}
+          board={board}
           active_div={active_div}
           set_active_div={set_active_div}
           color={color}
           white_pieces={white_pieces}
           black_pieces={black_pieces}
+          set_queen_dest={set_queen_dest}
+        />
+        <CastleButton
+          castle={castle}
+          color={color}
+          castle_possible_kingside={castle_possible_kingside}
+          castle_possible_queenside={castle_possible_queenside}
+          can_castle_kingside={can_castle_kingside}
+          can_castle_queenside={can_castle_queenside}
+          side="left"
+        />
+        <CastleButton
+          castle={castle}
+          color={color}
+          castle_possible_kingside={castle_possible_kingside}
+          castle_possible_queenside={castle_possible_queenside}
+          can_castle_kingside={can_castle_kingside}
+          can_castle_queenside={can_castle_queenside}
+          side="right"
         />
         <p className="header">Captures</p>
         <div className="captures-display">

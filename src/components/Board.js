@@ -3,7 +3,15 @@ import Row from './Row';
 
 function Board(props) {
 
-  const { color, activate_piece, set_active_div, active_div, move_piece, board_state, is_active, white_pieces, black_pieces } = props;
+  const { board,
+          color, 
+          activate_piece, 
+          set_active_div, 
+          active_div, 
+          move_piece, 
+          is_active, 
+          white_pieces, 
+          black_pieces } = props;
   
   const yxs = [];
   for (let i = 0; i < 8; i++) {
@@ -15,7 +23,7 @@ function Board(props) {
 
   return (
     <div className="Board">
-      { color===1?board_state.map((row,idx) =>
+      { color===1?board.map((row,idx) =>
           <Row
             activate_piece={activate_piece}
             move_piece={move_piece}
@@ -30,7 +38,7 @@ function Board(props) {
             is_active={is_active}
           />
        )
-       :board_state.map((row,idx) => 
+       :board.map((row,idx) => 
           <Row
             activate_piece={activate_piece}
             move_piece={move_piece}

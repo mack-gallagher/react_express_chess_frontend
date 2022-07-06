@@ -70,3 +70,15 @@ form, form > * {
   display: flex;
   flex-direction: column;
 }
+
+.queen-modal {
+  display: none;
+}
+
+.queen-modal-on {
+  margin: 2% auto;
+}
+
+.castle-button {
+  display: none;
+}

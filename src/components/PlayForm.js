@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useInterval } from '../utils';
 
 import axios from 'axios';
 
 function PlayForm(props) {
 
-  const { url, abandon_ship } = props;
+  const { url, dump } = props;
 
   const navigate = useNavigate();
+
+  const abandon_ship = async _ => {
+    await dump();
+    navigate('..');
+  }
 
   const initial_form_values = {
                                 player_name: '',
@@ -69,7 +75,7 @@ function PlayForm(props) {
       <button
         onClick={abandon_ship}
       >
-        Reset and Return To Main Page
+        Reset Game Data
       </button>
     </form>
          );
