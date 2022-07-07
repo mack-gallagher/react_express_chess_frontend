@@ -82,8 +82,8 @@ function Game(props) {
         },0);
         set_can_castle_kingside((response.data.castle_possible_kingside&&kingside_clear===0)?1:0);
         set_can_castle_queenside((response.data.castle_possible_queenside&&queenside_clear===0)?1:0);
-
         
+        console.log('HISTORY:',response.data.history);        
 
       })
       .catch(err => {
