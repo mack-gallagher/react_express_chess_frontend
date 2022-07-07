@@ -22,7 +22,13 @@ function CastleButton(props) {
             disabled={!enabled}
             onClick={() => castle(king_or_queen_side)}
           >
-            {`Castle ${king_or_queen_side==="kingside"?"Kingside":"Queenside"}`}
+          { king_or_queen_side==="kingside"?
+              (color===1?
+                '♔ <-> ♖'
+                :'♜ <-> ♚')
+              :(color===1?
+                '♖ <-> ♔'
+                :'♚ <-> ♜') }                
           </button>
           );
 }
