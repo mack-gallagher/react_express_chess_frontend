@@ -11,6 +11,7 @@ function CapturesDisplay(props) {
 
   return (
           <div className={"captures-display"+' '+my_or_theirs+' '+position}>
+            <p>{ (my_or_theirs==="my"?"Your ":(color===1?"Black's ":"White's "))+"captures" }</p>
             <p>-</p>
               <div className="captures">
                 { (my_or_theirs==="my"?

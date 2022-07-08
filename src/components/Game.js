@@ -205,16 +205,18 @@ function Game(props) {
             captures={captures}
             position="vertical"
           />
-          <button
-            onClick={reset_board}
-          >
-            Reset Board
-          </button>
-          <button
-            onClick={abandon_ship}
-          >
-            Reset and Return To Main Page
-          </button>
+          <div className="reset-container">
+            <button
+              onClick={reset_board}
+            >
+              Reset Board
+            </button>
+            <button
+              onClick={abandon_ship}
+            >
+              Reset and Return To Main Page
+            </button>
+          </div>
         </div>
           <CapturesDisplay
             color={color}

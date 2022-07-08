@@ -1,3 +1,52 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
 body {
   margin: 0;
   font-family: 'Helvetica';
@@ -15,6 +64,7 @@ body {
 }
 
 h1 {
+  font-size: 2rem;
   margin: 4% auto;
 }
 
@@ -33,17 +83,31 @@ h1, h2, h4, p {
   align-items: center;
 }
 
-.captures-display.vertical {
-  display: flex;
-  flex-direction: column;
-}
 
 .captures {
   display: flex;
 }
 
-.captures-display.horizontal {
+.captures-display.vertical {
   display: none;
+}
+
+.captures-display.horizontal {
+  display: flex;
+  flex-direction: column;
+  height: 50vh;
+  width: 120px;
+  background-color: rgb(120,120,80);
+  border: 1px solid gold;
+  padding: 1%;
+  margin: 0 auto;
+}
+
+.captures {
+  display: flex;
+  flex-direction: column;
+  height: 50vh;
+  flex-wrap: wrap;
 }
 
 .Game {
@@ -65,21 +129,10 @@ h1, h2, h4, p {
 
 .Board {
   display: flex;
-  width: 40vh;
-  height: 40vh;
+  height: 400px;
+  width: 400px;
   flex-direction: column;
 }
-
-
-/*
-.game-container.inactive .dark {
-  background-color: rgb(80,50,50);
-}
-
-.game-container.inactive .light {
-  background-color: rgb(100,80,80);
-}
-*/
 
 .row {
   height: 12.5%;
@@ -121,6 +174,20 @@ form, form > * {
   flex-direction: column;
 }
 
+.reset-container {
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  background: rgb(120,120,80);
+  border: 1px solid gold;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+}
+
 .queen-modal {
   display: none;
 }
@@ -133,59 +200,33 @@ form, form > * {
   display: none;
 }
 
-
-@media (max-height: 500px) {
-
+@media (max-width: 800px) {
   .game-container {
-    width: 90vw;
-  }
-
-    .captures-display.vertical {
-    display: none;
-  }
-
-  .captures-display.horizontal {
-    display: flex;
-    flex-direction: column;
-    height: 50vh;
-  }
-
-  .captures {
-    display: flex;
-    flex-direction: column;
-    height: 50vh;
-    flex-wrap: wrap;
-  }
-  
-}
-
-@media (max-height: 700px)
-       and (max-width: 800px) {
-
-
-  .game-container {
-    width: 90vw;
-  }
-
-  .captures-display.vertical {
-    display: none;
-  }
-
-  .captures-display.horizontal {
-    display: flex;
-    flex-direction: column;
-    height: 50vh;
-  }
-
-  .captures {
-    display: flex;
-    flex-direction: column;
-    height: 50vh;
-    flex-wrap: wrap;
-  }
+    justify-content: center;
+  }  
 
   .Board {
-    width: 40vw;
-    height: 40vw;
+    height: 50vw;
+    width: 50vw;
+  }
+
+  .reset-container {
+    width: 50vw;
+  }
+
+  .captures-display.horizontal {
+    width: 15vw;
+    margin: 2%;
   }
 }
+
+@media (max-width: 500px) {
+  .captures-display.horizontal {
+    min-width: 8vw;
+  }
+
+  .captures-display p {
+    display: none;
+  }
+}
+
