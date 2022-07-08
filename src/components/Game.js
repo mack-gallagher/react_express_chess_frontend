@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Board from './Board';
 import axios from 'axios';
-import useInterval from '../utils';
+import { useInterval } from '../utils';
 import QueenModal from './QueenModal';
 import CastleButton from './CastleButton';
+import CapturesDisplay from './CapturesDisplay';
 import { useNavigate } from 'react-router-dom';
 
 function Game(props) {
@@ -137,58 +138,90 @@ function Game(props) {
   }
 
   return (
-      <div className="Game">
-        <h1>{is_active?'Your turn!':((color-1)?'White':'Black')+"'s turn!"}</h1>
-        <QueenModal
-          on={queening}
-          axios_settings={axios_settings}
-          color={color}
-          url={url}
-          queen_dest={queen_dest}
-        />
-        <Board
-          activate_piece={activate_piece}
-          move_piece={move_piece}
-          board={board}
-          active_div={active_div}
-          set_active_div={set_active_div}
+      <div className="game-container">
+        <CapturesDisplay
           color={color}
           white_pieces={white_pieces}
           black_pieces={black_pieces}
-          set_queen_dest={set_queen_dest}
+          my_or_theirs="theirs"
+          captures={captures}
+          position="horizontal"
         />
-        <CastleButton
-          castle={castle}
-          color={color}
-          castle_possible_kingside={castle_possible_kingside}
-          castle_possible_queenside={castle_possible_queenside}
-          can_castle_kingside={can_castle_kingside}
-          can_castle_queenside={can_castle_queenside}
-          side="left"
-        />
-        <CastleButton
-          castle={castle}
-          color={color}
-          castle_possible_kingside={castle_possible_kingside}
-          castle_possible_queenside={castle_possible_queenside}
-          can_castle_kingside={can_castle_kingside}
-          can_castle_queenside={can_castle_queenside}
-          side="right"
-        />
-        <p className="header">Captures</p>
-        <div className="captures-display">
-          { captures }
+        <div className="Game">
+          <h1>{is_active?'Your turn!':((color-1)?'White':'Black')+"'s turn!"}</h1>
+          <CapturesDisplay
+            color={color}
+            white_pieces={white_pieces}
+            black_pieces={black_pieces}
+            my_or_theirs="theirs"
+            captures={captures}
+            position="vertical"
+          />
+          <QueenModal
+            on={queening}
+            axios_settings={axios_settings}
+            color={color}
+            url={url}
+            queen_dest={queen_dest}
+          />
+          <Board
+            activate_piece={activate_piece}
+            move_piece={move_piece}
+            board={board}
+            active_div={active_div}
+            set_active_div={set_active_div}
+            color={color}
+            white_pieces={white_pieces}
+            black_pieces={black_pieces}
+            set_queen_dest={set_queen_dest}
+          />
+          <div className="castle-button-container">
+            <CastleButton
+              castle={castle}
+              color={color}
+              castle_possible_kingside={castle_possible_kingside}
+              castle_possible_queenside={castle_possible_queenside}
+              can_castle_kingside={can_castle_kingside}
+              can_castle_queenside={can_castle_queenside}
+              side="left"
+            />
+            <CastleButton
+              castle={castle}
+              color={color}
+              castle_possible_kingside={castle_possible_kingside}
+              castle_possible_queenside={castle_possible_queenside}
+              can_castle_kingside={can_castle_kingside}
+              can_castle_queenside={can_castle_queenside}
+              side="right"
+            />
+          </div>
+          <CapturesDisplay
+            color={color}
+            white_pieces={white_pieces}
+            black_pieces={black_pieces}
+            my_or_theirs="my"
+            captures={captures}
+            position="vertical"
+          />
+          <button
+            onClick={reset_board}
+          >
+            Reset Board
+          </button>
+          <button
+            onClick={abandon_ship}
+          >
+            Reset and Return To Main Page
+          </button>
         </div>
-        <button
-          onClick={reset_board}
-        >
-          Reset Board
-        </button>
-        <button
-          onClick={abandon_ship}
-        >
-          Reset and Return To Main Page
-        </button>
+          <CapturesDisplay
+            color={color}
+            white_pieces={white_pieces}
+            black_pieces={black_pieces}
+            my_or_theirs="my"
+            captures={captures}
+            position="horizontal"
+          />
       </div>
           );
 

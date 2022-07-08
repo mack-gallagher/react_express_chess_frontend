@@ -1,14 +1,14 @@
 body {
   margin: 0;
   font-family: 'Helvetica';
+  background-color: rgb(4,10,17);
 }
 
 .App {
   text-align: center;
-  width: 100%;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   background-color: rgb(10,100,140);
@@ -18,15 +18,55 @@ h1 {
   margin: 4% auto;
 }
 
-h1, h2, h4 {
+h1, h2, h4, p {
   color: white;
   font-weight: lighter;
 }
 
+.capture.white {
+  color: white;
+}
+
+.game-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.captures-display.vertical {
+  display: flex;
+  flex-direction: column;
+}
+
+.captures {
+  display: flex;
+}
+
+.captures-display.horizontal {
+  display: none;
+}
+
+.Game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 60vw;
+  min-width: 44vh;
+  min-height: 92vh;
+  background-color: rgb(10,100,140);
+}
+
+.castle-button-container {
+  width: 40vh;
+  display: flex;
+  justify-content: space-around;
+}
+
 .Board {
   display: flex;
-  width: 50vw;
-  height: 50vw;
+  width: 40vh;
+  height: 40vh;
   flex-direction: column;
 }
 
@@ -56,8 +96,7 @@ h1, h2, h4 {
   color: rgb(200,100,100);
 }
 
-.header {
-  
+.header { 
   text-decoration: underline;
   color: rgb(120,180,220);
 }
@@ -81,4 +120,35 @@ form, form > * {
 
 .castle-button {
   display: none;
+}
+
+@media (max-height: 700px)
+       and (max-width: 800px) {
+
+
+  .game-container {
+    width: 90vw;
+  }
+
+  .captures-display.vertical {
+    display: none;
+  }
+
+  .captures-display.horizontal {
+    display: flex;
+    flex-direction: column;
+    height: 50vh;
+  }
+
+  .captures {
+    display: flex;
+    flex-direction: column;
+    height: 50vh;
+    flex-wrap: wrap;
+  }
+
+  .Board {
+    width: 40vw;
+    height: 40vw;
+  }
 }

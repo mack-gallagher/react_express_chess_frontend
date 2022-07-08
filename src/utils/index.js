@@ -22,4 +22,4 @@ function useInterval(callback, delay) {
   }, [delay]);
 }
 
-export default useInterval;
+export { useInterval };

@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import useInterval from '../utils';
+import { useInterval } from '../utils';
 import { useNavigate } from 'react-router-dom';
 
 function WaitingPage(props) {

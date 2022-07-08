@@ -16,12 +16,14 @@ function WinPage(props) {
 
   const [color,set_color] = useState(null);
   const [won,set_won] = useState(null);
+  const [history,set_history] = useState([]);
 
   useEffect(() => {
     axios.get(`${url}/api/game/`,axios_settings)
       .then(response => {
         set_color(response.data.color);
         set_won(response.data.won);
+        set_history(response.data.history);
       });
   });
 
@@ -30,6 +32,11 @@ function WinPage(props) {
             <h2>
               { (won===color?"You":(won===1?"White":"Black"))+" win"+(won===color?'':'s')+'!' }
             </h2>
+            <h4>Game History:</h4>
+            <ul>
+              { history.map(x => 
+                  <li>x</li>) }
+            </ul>
             <button
               onClick={() => abandon_ship().then(response => navigate('..'))}
             >
