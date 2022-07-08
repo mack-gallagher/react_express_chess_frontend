@@ -138,7 +138,7 @@ function Game(props) {
   }
 
   return (
-      <div className="game-container">
+      <div className={"game-container"+(is_active?"":" inactive")}>
         <CapturesDisplay
           color={color}
           white_pieces={white_pieces}
@@ -148,7 +148,7 @@ function Game(props) {
           position="horizontal"
         />
         <div className="Game">
-          <h1>{is_active?'Your turn!':((color-1)?'White':'Black')+"'s turn!"}</h1>
+          <h1>{(is_active?(color===1?'Your ':'Your '):(color===1?'Black':'White')+"'s ")+"turn!"}</h1> 
           <CapturesDisplay
             color={color}
             white_pieces={white_pieces}
@@ -177,6 +177,7 @@ function Game(props) {
           />
           <div className="castle-button-container">
             <CastleButton
+              active={is_active}
               castle={castle}
               color={color}
               castle_possible_kingside={castle_possible_kingside}
@@ -186,6 +187,7 @@ function Game(props) {
               side="left"
             />
             <CastleButton
+              active={is_active}
               castle={castle}
               color={color}
               castle_possible_kingside={castle_possible_kingside}

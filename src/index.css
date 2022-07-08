@@ -70,6 +70,17 @@ h1, h2, h4, p {
   flex-direction: column;
 }
 
+
+/*
+.game-container.inactive .dark {
+  background-color: rgb(80,50,50);
+}
+
+.game-container.inactive .light {
+  background-color: rgb(100,80,80);
+}
+*/
+
 .row {
   height: 12.5%;
   display: flex;
@@ -120,6 +131,32 @@ form, form > * {
 
 .castle-button {
   display: none;
+}
+
+
+@media (max-height: 500px) {
+
+  .game-container {
+    width: 90vw;
+  }
+
+    .captures-display.vertical {
+    display: none;
+  }
+
+  .captures-display.horizontal {
+    display: flex;
+    flex-direction: column;
+    height: 50vh;
+  }
+
+  .captures {
+    display: flex;
+    flex-direction: column;
+    height: 50vh;
+    flex-wrap: wrap;
+  }
+  
 }
 
 @media (max-height: 700px)
