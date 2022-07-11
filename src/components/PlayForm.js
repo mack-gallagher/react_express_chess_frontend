@@ -28,14 +28,13 @@ function PlayForm(props) {
   const on_submit = async (evt) => {
     evt.preventDefault();
 
-    const new_player = {
-                          name: form_values.player_name,
-                        };
-
     set_form_values(initial_form_values);
-    const response = await axios.post(`${url}/api/auth`,new_player);
+    const response = await axios.post(`${url}/api/auth`,{});
 
+
+    localStorage.removeItem('token');
     localStorage.setItem('token',response.data.token);
+    console.log('new token:',response.data.token);
 
     let axios_settings = {
       headers: {
@@ -53,22 +52,11 @@ function PlayForm(props) {
   }
 
   return (
-    <form 
+    <div 
       className="PlayForm"
-      onSubmit={on_submit}
     >
-      <label>
-        Enter your name here:
-        <input
-          type='text'
-          name='player_name'
-          value={form_values.player_name}
-          onChange={on_change}
-        />
-      </label>
       <button 
-        type='submit'
-        disabled={form_values.player_name.length?false:true}
+        onClick={on_submit}
       >
         PLAY
       </button>
@@ -77,7 +65,7 @@ function PlayForm(props) {
       >
         Reset Game Data
       </button>
-    </form>
+    </div>
          );
 };
 

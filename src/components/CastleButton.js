@@ -18,7 +18,7 @@ function CastleButton(props) {
 
   return (
           <button
-            className={on?"castle-button-on":"castle-button"}
+            className={(on?"castle-button-on":"castle-button")+"game-button"}
             disabled={!enabled}
             onClick={() => castle(king_or_queen_side)}
           >

@@ -3,7 +3,8 @@ import Row from './Row';
 
 function Board(props) {
 
-  const { board,
+  const { active,
+          board,
           color, 
           activate_piece, 
           set_active_div, 
@@ -25,6 +26,7 @@ function Board(props) {
     <div className="Board">
       { color===1?board.map((row,idx) =>
           <Row
+            active={active}
             activate_piece={activate_piece}
             move_piece={move_piece}
             key={idx}
@@ -40,6 +42,7 @@ function Board(props) {
        )
        :board.map((row,idx) => 
           <Row
+            active={active}
             activate_piece={activate_piece}
             move_piece={move_piece}
             key={idx}

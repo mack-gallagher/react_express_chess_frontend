@@ -3,7 +3,7 @@ import Square from './Square';
 
 function Row(props) {
 
-  const { color, activate_piece, set_active_div, active_div, move_piece, y, xs, is_active, white_pieces, black_pieces, set_queen_dest } = props;
+  const { active, color, activate_piece, set_active_div, active_div, move_piece, y, xs, is_active, white_pieces, black_pieces, set_queen_dest } = props;
 
   useEffect(() => {
   },[]);
@@ -12,6 +12,7 @@ function Row(props) {
       <div className={`row y${y}`}>
         { color===1?xs.map((x,idx) =>
             <Square
+              active={active}
               activate_piece={activate_piece}
               active_div={active_div}
               set_active_div={set_active_div}
@@ -29,6 +30,7 @@ function Row(props) {
           )
           :xs.map((x,idx) => 
             <Square
+              active={active}
               activate_piece={activate_piece}
               active_div={active_div}
               set_active_div={set_active_div} 

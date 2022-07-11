@@ -60,12 +60,8 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: rgb(10,100,140);
-}
-
-h1 {
-  font-size: 2rem;
-  margin: 4% auto;
+  background-color: rgba(150,149,129);
+/* background-color: rgb(10,100,140); */
 }
 
 h1, h2, h4, p {
@@ -77,12 +73,30 @@ h1, h2, h4, p {
   color: white;
 }
 
-.game-container {
+.game-vertical {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
   align-items: center;
+  background-color: rgba(150,149,129);
+  padding: 2%;
 }
 
+.game-header {
+  border: 1px solid gold;
+  line-height: 4rem;
+  width: 400px;
+  margin: 3%;
+  flex: 5;
+  font-size: 1.8rem;
+  background-color: rgb(112,112,112);
+}
+
+.game-horizontal {
+  display: flex;
+  width: 80vw;
+  justify-content: center;
+  align-items: flex-start;
+}
 
 .captures {
   display: flex;
@@ -95,12 +109,16 @@ h1, h2, h4, p {
 .captures-display.horizontal {
   display: flex;
   flex-direction: column;
-  height: 50vh;
-  width: 120px;
-  background-color: rgb(120,120,80);
-  border: 1px solid gold;
+  height: 400px;
+  width: 100px;
+  background-color: rgb(112,120,112);
   padding: 1%;
   margin: 0 auto;
+  border: 1px solid gold;
+}
+
+.captures-display.horizontal p {
+  font-size: 0.75rem;
 }
 
 .captures {
@@ -115,16 +133,14 @@ h1, h2, h4, p {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 60vw;
-  min-width: 44vh;
-  min-height: 92vh;
   background-color: rgb(10,100,140);
 }
 
 .castle-button-container {
-  width: 40vh;
+  background-color: rgba(219,180,150,60%);
+  width: 400px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .Board {
@@ -162,30 +178,55 @@ h1, h2, h4, p {
 
 .header { 
   text-decoration: underline;
-  color: rgb(120,180,220);
+  background-color: rgb(112,120,112);
 }
 
 button {
   margin: 2% 0 0;
+  background-color: rgb(112,120,112);
+  border: 1px solid gold;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  max-width: 20vw;
 }
 
-form, form > * {
+.PlayForm {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+.PlayForm button {
+  width: 100%;
+  max-width: 100vw;
 }
 
 .reset-container {
+  background-color: rgba(219,180,150,60%);
   width: 400px;
   display: flex;
   justify-content: space-between;
 }
 
-button {
-  background: rgb(120,120,80);
-  border: 1px solid gold;
-  color: white;
-  padding: 5px;
-  border-radius: 5px;
+
+button:enabled:hover {
+  background-color: rgb(180,180,100);
+  cursor: pointer;
+}
+
+.square.light.piece-selectable:hover {
+  color: rgb(200,100,100);
+  cursor: pointer;
+}
+
+.square.dark.piece-selectable:hover {
+  color: rgb(200,100,100);
+  cursor: pointer;
+}
+
+.possibly-movable {
+  cursor: pointer;
 }
 
 .queen-modal {
@@ -201,32 +242,57 @@ button {
 }
 
 @media (max-width: 800px) {
-  .game-container {
+  .game-horizontal {
     justify-content: center;
-  }  
+    align-items: flex-start;
+  } 
 
   .Board {
     height: 50vw;
     width: 50vw;
   }
 
-  .reset-container {
+  .game-header {
+    width: 50vw;
+  }
+
+  .castle-button-container, .reset-container {
     width: 50vw;
   }
 
   .captures-display.horizontal {
-    width: 15vw;
-    margin: 2%;
-  }
-}
-
-@media (max-width: 500px) {
-  .captures-display.horizontal {
-    min-width: 8vw;
+    height: 50vw;
+    width: 50px;
   }
 
   .captures-display p {
     display: none;
   }
+
 }
 
+@media (max-height: 600px) {
+  .game-header {
+    font-size: 1.2rem;
+    line-height: 2rem;
+    margin: 1%;
+    width: 40vh;
+  }
+
+  .captures-display.horizontal {
+    height: 40vh;
+  }
+
+  .castle-button-container, .reset-container {
+    width: 40vh;
+  }
+
+  .Board {
+    height: 40vh;
+    width: 40vh;
+  }
+
+  .game-button {
+    font-size: 0.5rem;
+  }
+}
