@@ -14,7 +14,7 @@ import WinPage from './components/WinPage';
 
 import { BrowserRouter } from 'react-router-dom';
 
-const url = 'https://react-express-chess-server.herokuapp.com/';
+const url = 'http://localhost:9000'; /* 'https://react-express-chess-server.herokuapp.com/'; */
 
 let axios_settings = {
   headers: {
