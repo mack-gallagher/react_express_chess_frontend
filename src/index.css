@@ -60,8 +60,7 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: rgba(150,149,129);
-/* background-color: rgb(10,100,140); */
+  background-color: rgb(150,150,152);
 }
 
 h1, h2, h4, p {
@@ -77,7 +76,7 @@ h1, h2, h4, p {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgba(150,149,129);
+  background-color: rgb(150,150,152);
   padding: 2%;
 }
 
@@ -111,7 +110,7 @@ h1, h2, h4, p {
   flex-direction: column;
   height: 400px;
   width: 100px;
-  background-color: rgb(112,120,112);
+  background-color: rgb(112,112,112);
   padding: 1%;
   margin: 0 auto;
   border: 1px solid gold;
@@ -137,7 +136,7 @@ h1, h2, h4, p {
 }
 
 .castle-button-container {
-  background-color: rgba(219,180,150,60%);
+  background-color: rgb(150,150,152);
   width: 400px;
   display: flex;
   justify-content: space-between;
@@ -203,7 +202,7 @@ button {
 }
 
 .reset-container {
-  background-color: rgba(219,180,150,60%);
+  background-color: rgb(150,150,152);
   width: 400px;
   display: flex;
   justify-content: space-between;
@@ -243,7 +242,6 @@ button:enabled:hover {
 
 @media (max-width: 800px) {
   .game-horizontal {
-    justify-content: center;
     align-items: flex-start;
   } 
 
@@ -271,6 +269,8 @@ button:enabled:hover {
 
 }
 
+/*
+
 @media (max-height: 600px) {
   .game-header {
     font-size: 1.2rem;
@@ -296,3 +296,5 @@ button:enabled:hover {
     font-size: 0.5rem;
   }
 }
+
+*/

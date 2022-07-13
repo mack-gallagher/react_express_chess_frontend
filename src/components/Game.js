@@ -144,7 +144,7 @@ function Game(props) {
         >
           {(is_active?
             (color===1?'Your ':'Your ')
-            :(color===1?'Black':'White')+"'s ")+"turn!"}
+            :(color===1?'Black':'White')+"'s ")+"turn"}
         </h1> 
         <div className="game-horizontal">
           <CapturesDisplay
