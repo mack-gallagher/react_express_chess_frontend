@@ -50,7 +50,7 @@ table {
 body {
   margin: 0;
   font-family: 'Helvetica';
-  background-color: rgb(4,10,17);
+  background-color: rgb(50,50,52);
 }
 
 .App {
@@ -60,7 +60,7 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: rgb(150,150,152);
+  background-color: rgb(50,50,52);
 }
 
 h1, h2, h4, p {
@@ -76,7 +76,6 @@ h1, h2, h4, p {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgb(150,150,152);
   padding: 2%;
 }
 
@@ -87,7 +86,7 @@ h1, h2, h4, p {
   margin: 3%;
   flex: 5;
   font-size: 1.8rem;
-  background-color: rgb(112,112,112);
+  background-color: rgb(90,90,92);
 }
 
 .game-horizontal {
@@ -110,7 +109,7 @@ h1, h2, h4, p {
   flex-direction: column;
   height: 400px;
   width: 100px;
-  background-color: rgb(112,112,112);
+  background-color: rgb(90,90,92);
   padding: 1%;
   margin: 0 auto;
   border: 1px solid gold;
@@ -132,11 +131,10 @@ h1, h2, h4, p {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgb(10,100,140);
+  background-color: rgb(50,50,52);
 }
 
 .castle-button-container {
-  background-color: rgb(150,150,152);
   width: 400px;
   display: flex;
   justify-content: space-between;
@@ -182,7 +180,7 @@ h1, h2, h4, p {
 
 button {
   margin: 2% 0 0;
-  background-color: rgb(112,112,112);
+  background-color: rgb(90,90,92);
   border: 1px solid gold;
   color: white;
   padding: 5px;
@@ -207,7 +205,6 @@ button[disabled] {
 }
 
 .reset-container {
-  background-color: rgb(150,150,152);
   width: 400px;
   display: flex;
   justify-content: space-between;
