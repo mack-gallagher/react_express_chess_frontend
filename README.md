@@ -8,6 +8,14 @@ Client-side application using React and React Router, that allows players to int
 
 The chess front-end should currently be bug-free; if you find a bug, please message me on GitHub!
 
+## Technologies Used
+
+- HTML
+- CSS
+- React to build UI components
+- React Router Dom to create multiple client-side routes
+- axios to make API calls
+
 ## Usage
 
 To play a game, have a friend open the frontend and separately open your own frontend instance. Then, both of you should click [Play]. After that, you should see a chessboard.
