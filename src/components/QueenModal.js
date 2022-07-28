@@ -4,12 +4,12 @@ import axios from 'axios';
 
 function QueenModal(props) {
 
-  const { url, on, color, pos, axios_settings, queen_dest } = props;
+  const { game_url, on, color, pos, axios_settings, queen_dest } = props;
 
   const our_pieces = color===1?['♕','♗','♖','♘','♙']:['♛','♝','♜','♞','♟'];
 
   const select_piece = piece => {
-    axios.post(`${url}/api/game/queen/`,{ pos: queen_dest, new_piece: piece },axios_settings);
+    axios.post(`${game_url}/api/game/queen/`,{ pos: queen_dest, new_piece: piece },axios_settings);
   }
 
   return (

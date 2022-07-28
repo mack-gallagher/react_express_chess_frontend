@@ -14,7 +14,9 @@ import WinPage from './components/WinPage';
 
 import { BrowserRouter } from 'react-router-dom';
 
-const url = /* 'http://localhost:9000'; */ 'https://react-express-chess-server.herokuapp.com/';
+const game_url = 'http://localhost:9000'; /* 'https://react-express-chess-server.herokuapp.com/'; */
+
+const igor_url = 'http://localhost:4000';
 
 let axios_settings = {
   headers: {
@@ -23,7 +25,7 @@ let axios_settings = {
 };
 
 const dump = async _ => {
-  await axios.post(`${url}/api/game/dump`,{},axios_settings);
+  await axios.post(`${game_url}/api/game/dump`,{},axios_settings);
 };
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -31,10 +33,10 @@ root.render(
   <BrowserRouter>
     <Routes>
       <Route path='/' element={ <App /> }>
-        <Route exact path='/' element={ <PlayForm url={url} dump={dump} /> } />
-        <Route path='game' element={ <Game url={url} dump={dump} /> } />
-        <Route path='waiting' element={ <WaitingPage url={url} dump={dump} /> } />
-        <Route path='endgame' element={ <WinPage url={url} dump={dump} /> } />
+        <Route exact path='/' element={ <PlayForm game_url={game_url} dump={dump} /> } />
+        <Route path='game' element={ <Game game_url={game_url} dump={dump} /> } />
+        <Route path='waiting' element={ <WaitingPage game_url={game_url} igor_url={igor_url} dump={dump} /> } />
+        <Route path='endgame' element={ <WinPage game_url={game_url} dump={dump} /> } />
       </Route>
     </Routes>
   </BrowserRouter>

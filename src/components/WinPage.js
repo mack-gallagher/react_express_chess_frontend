@@ -4,7 +4,7 @@ import axios from 'axios';
 
 function WinPage(props) {
 
-  const { url, abandon_ship } = props; 
+  const { game_url, abandon_ship } = props; 
 
   let axios_settings = {
     headers: {
@@ -19,7 +19,7 @@ function WinPage(props) {
   const [history,set_history] = useState([]);
 
   useEffect(() => {
-    axios.get(`${url}/api/game/`,axios_settings)
+    axios.get(`${game_url}/api/game/`,axios_settings)
       .then(response => {
         set_color(response.data.color);
         set_won(response.data.won);

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 function WaitingPage(props) {
 
-  const { url, dump } = props;
+  const { game_url, igor_url, dump } = props;
 
   const navigate = useNavigate();
 
@@ -20,8 +20,13 @@ function WaitingPage(props) {
     navigate('..');
   }
 
+  const alert_igor = async _ => {
+    const data = await axios.post(`${igor_url}`,{},{params: {player: 1}},axios_settings);
+    console.log(data);
+  }
+
   useInterval(() => {
-    axios.get(`${url}/api/game`,axios_settings)
+    axios.get(`${game_url}/api/game`,axios_settings)
       .then(response => {
         if (response.data.num_players === 2) {
           navigate('../game');
@@ -35,6 +40,11 @@ function WaitingPage(props) {
   return (
           <div className="waiting-page">
             <h1>Waiting for a Player 2 to join...</h1>
+            <button
+              onClick={alert_igor}
+            >
+              Play Machine
+            </button>
             <button
               onClick={() => dump().then(response => navigate('..'))}
             >

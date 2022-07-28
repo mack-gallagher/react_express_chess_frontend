@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useInterval } from '../utils';
 
@@ -6,7 +6,12 @@ import axios from 'axios';
 
 function PlayForm(props) {
 
-  const { url, dump } = props;
+  const { game_url, dump } = props;
+
+
+  useEffect(() => {
+    localStorage.removeItem('token');
+  },[]);
 
   const navigate = useNavigate();
 
@@ -29,7 +34,7 @@ function PlayForm(props) {
     evt.preventDefault();
 
     set_form_values(initial_form_values);
-    const response = await axios.post(`${url}/api/auth`,{});
+    const response = await axios.post(`${game_url}/api/auth`,{});
 
 
     localStorage.removeItem('token');
@@ -42,7 +47,7 @@ function PlayForm(props) {
       }
     };
 
-    const response_2 = await axios.get(`${url}/api/game`,axios_settings);
+    const response_2 = await axios.get(`${game_url}/api/game`,axios_settings);
 
     if (response_2.data.num_players === 1) {
       navigate('./waiting');

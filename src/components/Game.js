@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Game(props) {
 
-  const { url, dump } = props;
+  const { game_url, dump } = props;
 
   const navigate = useNavigate();
 
@@ -48,7 +48,7 @@ function Game(props) {
   const black_pieces = ['♚','♛','♝','♜','♞','♟'];
 
   useEffect(() => {
-    axios.get(`${url}/api/game/`,axios_settings)
+    axios.get(`${game_url}/api/game/`,axios_settings)
       .then(response => {
         set_board(response.data.board); 
         set_color(response.data.color);
@@ -57,7 +57,7 @@ function Game(props) {
 
 
   useInterval(() => {
-    axios.get(`${url}/api/game`,axios_settings)
+    axios.get(`${game_url}/api/game`,axios_settings)
       .then(response => {
         if (response.data.won !== -1) {
           navigate('../endgame');
@@ -94,7 +94,7 @@ function Game(props) {
   }, 1000);
 
   const activate_piece = async (pos) => {
-    const response = await axios.post(`${url}/api/game/activate`,{ pos },axios_settings);
+    const response = await axios.post(`${game_url}/api/game/activate`,{ pos },axios_settings);
     if (response.status === 200) {
       set_active_div(pos);
     }
@@ -106,7 +106,7 @@ function Game(props) {
     const piece = board[pos[0]][pos[1]].piece;
 
     try {
-      const response = await axios.post(`${url}/api/game/move`,{ start: active_div, destination: pos },axios_settings);
+      const response = await axios.post(`${game_url}/api/game/move`,{ start: active_div, destination: pos },axios_settings);
 
       if (response.data.queening) {
         await set_queening(1);
@@ -116,7 +116,7 @@ function Game(props) {
         set_queen_dest(pos);
       }
       set_active_div([null,null]);
-      const board_response = await axios.get(`${url}/api/game/`,axios_settings);
+      const board_response = await axios.get(`${game_url}/api/game/`,axios_settings);
       set_board(board_response.data.board);
 
     } catch (err) {
@@ -126,14 +126,14 @@ function Game(props) {
 
   const castle = async (king_or_queen_side) => {
     try {
-      await axios.post(`${url}/api/game/castle`,{ king_or_queen_side: king_or_queen_side },axios_settings);
+      await axios.post(`${game_url}/api/game/castle`,{ king_or_queen_side: king_or_queen_side },axios_settings);
     } catch (err) {
       console.error(err);
     }
   }
 
   const reset_board = async _ => {
-    const response = await axios.post(`${url}/api/game/reset`,{},axios_settings);
+    const response = await axios.post(`${game_url}/api/game/reset`,{},axios_settings);
     set_board(response.data.board);
   }
 
@@ -168,7 +168,7 @@ function Game(props) {
               on={queening}
               axios_settings={axios_settings}
               color={color}
-              url={url}
+              game_url={game_url}
               queen_dest={queen_dest}
             />
             <Board
