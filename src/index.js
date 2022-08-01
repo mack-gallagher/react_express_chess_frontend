@@ -14,7 +14,7 @@ import WinPage from './components/WinPage';
 
 import { BrowserRouter } from 'react-router-dom';
 
-const game_url = /* 'http://localhost:9000'; */ 'https://react-express-chess-server.herokuapp.com/'; 
+const game_url = /* 'http://localhost:9000'; */ 'https://react-express-chess-server.herokuapp.com'; 
 
 const igor_url = 'http://localhost:4000';
 
