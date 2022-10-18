@@ -40,11 +40,11 @@ function WaitingPage(props) {
   return (
           <div className="waiting-page">
             <h1>Waiting for a Player 2 to join...</h1>
-            <button
+         {/*   <button
               onClick={alert_igor}
             >
               Play Machine
-            </button>
+            </button> */ }
             <button
               onClick={() => dump().then(response => navigate('..'))}
             >
