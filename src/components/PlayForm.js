@@ -63,6 +63,7 @@ function PlayForm(props) {
       <p
         style={{
           color: 'white',
+          maxWidth: '20vw',
         }}
       >
         [ The server currently only serves one game at a time, so if nothing happens when you click Play, you may have to reset the game data. ]
