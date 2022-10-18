@@ -61,8 +61,8 @@ function PlayForm(props) {
       className="PlayForm"
     >
       <p
-        color={{
-          'white',
+        style={{
+          color: 'white',
         }}
       >
         [ The server currently only serves one game at a time, so if nothing happens when you click Play, you may have to reset the game data. ]
