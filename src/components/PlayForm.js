@@ -60,7 +60,13 @@ function PlayForm(props) {
     <div 
       className="PlayForm"
     >
-      [ The server currently only serves one game at a time, so if nothing happens when you click Play, you may have to reset the game data. ]
+      <p
+        color={{
+          'white',
+        }}
+      >
+        [ The server currently only serves one game at a time, so if nothing happens when you click Play, you may have to reset the game data. ]
+      </p>
       <button 
         onClick={on_submit}
       >
